@@ -17,12 +17,6 @@
                 </svg>
             </a>
         </div>
-        <li class="nav-item w-100">
-            <a class="nav-link" href="widgets.html">
-                <i class="fe fe-home fe-16"></i>
-                <span class="ml-3 item-text">لوحة التحكم</span>
-            </a>
-        </li>
         <p class="text-muted nav-heading mt-4 mb-1">
             <span>الطلبات</span>
         </p>

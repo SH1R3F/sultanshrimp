@@ -18,9 +18,7 @@ use App\Http\Controllers\OptionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', '/admin/home');
 
 Auth::routes();
 
@@ -28,7 +26,8 @@ Route::group([
     'middleware' => 'auth',
     'prefix' => 'admin'
 ], function() {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    // Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::redirect('/home', '/admin/orders')->name('home');
 
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
