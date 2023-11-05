@@ -18,31 +18,31 @@
             </a>
         </div>
         <p class="text-muted nav-heading mt-4 mb-1">
-            <span>الطلبات</span>
+            <span>الطلبات | Orders</span>
         </p>
         <ul class="navbar-nav flex-fill w-100 mb-2">
             <li class="nav-item w-100">
                 <a class="nav-link" href="{{ route('orders') }}">
                     <i class="fe fe-box fe-16"></i>
-                    <span class="ml-3 item-text">الطلبات</span>
+                    <span class="ml-3 item-text">الطلبات | Orders</span>
                 </a>
             </li>
             <li class="nav-item w-100">
                 <a class="nav-link" href="{{ route('options') }}">
                     <i class="fe fe-grid fe-16"></i>
-                    <span class="ml-3 item-text">الخيارات</span>
+                    <span class="ml-3 item-text">الخيارات | Options</span>
                 </a>
             </li>
         </ul>
         @if (auth()->user()->id === 1)
             <p class="text-muted nav-heading mt-4 mb-1">
-                <span>الإعدادات</span>
+                <span>الإعدادات | Settings</span>
             </p>
             <ul class="navbar-nav flex-fill w-100 mb-2">
                 <li class="nav-item w-100">
                     <a class="nav-link" href="{{ route('users') }}">
                         <i class="fe fe-box fe-16"></i>
-                        <span class="ml-3 item-text">المستخدمين</span>
+                        <span class="ml-3 item-text">المستخدمين | Users</span>
                     </a>
                 </li>
             </ul>

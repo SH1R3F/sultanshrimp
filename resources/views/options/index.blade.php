@@ -15,7 +15,7 @@
             @include('layouts.alerts')
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="page-title">خيارات الطلبات</h2>
+                    <h2 class="page-title">خيارات الطلبات | Orders options</h2>
                     <p class="text-muted">إضافة وتعديلات خيارات الطلبات.</p>
                     <div class="row">
                         <div class="col-md-12">
@@ -25,7 +25,7 @@
                                     <div class="card-body">
                                         <div class="form-row">
                                             <div class="form-group w-100">
-                                                <label for="branches">الفروع</label>
+                                                <label for="branches">الفروع | branches</label>
                                                 <select class="form-control select2-multi" id="branches" name="branches[]" multiple>
                                                     @foreach ($options['branches'] ?? [] as $branch)
                                                         <option value="{{ $branch }}" selected>{{ $branch }}</option>
@@ -35,7 +35,7 @@
                                         </div> <!-- form-row -->
                                         <div class="form-row">
                                             <div class="form-group w-100">
-                                                <label for="resources">الموارد</label>
+                                                <label for="resources">الموارد | Items</label>
                                                 <select class="form-control select2-multi" name="resources[]" id="resources" multiple>
                                                     @foreach ($options['resources'] ?? [] as $resource)
                                                         <option value="{{ $resource }}" selected>{{ $resource }}</option>

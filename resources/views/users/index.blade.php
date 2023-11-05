@@ -13,20 +13,20 @@
                     <div class="row">
                         <!-- Small table -->
                         <div class="col-md-12 my-4">
-                            <h2 class="h4 mb-3">المستخدمين</h2>
+                            <h2 class="h4 mb-3">المستخدمين | Users</h2>
                             <div class="card shadow">
                                 <div class="card-body">
                                     <div class="toolbar">
                                         <form class="form">
                                             <div class="form-row">
                                                 <div class="form-group col-auto mr-auto">
-                                                    <a href="{{ route('users.create') }}" class="btn btn-primary">إنشاء جديد</a>
+                                                    <a href="{{ route('users.create') }}" class="btn btn-primary">إنشاء جديد | New user</a>
                                                 </div>
 
                                                 <div class="form-group col-auto d-flex">
                                                     <form method="GET" action="{{ route('users') }}">
                                                         <label for="search" class="sr-only">بحث</label>
-                                                        <input type="text" name="search" class="form-control" id="search1" placeholder="بحث..." value="{{ request()->get('search') }}">
+                                                        <input type="text" name="search" class="form-control" id="search1" placeholder="بحث | Search..." value="{{ request()->get('search') }}">
                                                         <input type="submit" value="بحث" class="btn btn-primary mx-2">
                                                     </form>
                                                 </div>
@@ -38,9 +38,9 @@
                                         <thead>
                                             <tr>
                                                 <td>#</td>
-                                                <th>اسم المستخدم</th>
-                                                <th>البريد الإلكتروني</th>
-                                                <th>تاريخ الانشاء</th>
+                                                <th>اسم المستخدم | Username</th>
+                                                <th>البريد الإلكتروني | Email</th>
+                                                <th>تاريخ الانشاء | Date</th>
                                                 <th></th>
                                             </tr>
                                         </thead>

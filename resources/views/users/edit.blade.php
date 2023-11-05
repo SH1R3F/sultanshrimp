@@ -24,28 +24,29 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group mb-3">
-                                            <label for="simpleinput">الاسم</label>
+                                            <label for="simpleinput">الاسم | Name</label>
                                             <input type="text" id="simpleinput" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}" name="name" required>
                                             @error('name')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="example-email">البريد الإلكتروني</label>
+                                            <label for="example-email">البريد الإلكتروني | Email</label>
                                             <input type="email" id="example-email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}" required>
                                             @error('email')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="example-password">كلمة المرور</label>
+                                            <label for="example-password">كلمة المرور | Password</label>
                                             <input type="password" id="example-password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password">
                                             @error('password')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                             <strong class="text-muted text-sm">أتركها فارغة ان لم ترد تغيير كلمة المرور للمستخدم</strong>
+                                            <strong class="text-muted text-sm">Leave empty if you don't wanna change the password</strong>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">حفظ</button>
+                                        <button type="submit" class="btn btn-primary">حفظ | Save</button>
                                     </form>
                                 </div> <!-- /.col -->
                             </div>

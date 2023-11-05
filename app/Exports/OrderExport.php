@@ -24,9 +24,9 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
     {
         return [
             '#',
-            'الطلبية',
-            'المطلوب',
-            'الموجود',
+            'الطلبية | Order',
+            'المطلوب | Required',
+            'الموجود | Existing',
         ];
     }
 

@@ -1672,6 +1672,7 @@
                 <div class="card-heading" style="background-image: url('{{ asset('assets/banner.jpg') }}')"></div>
                 <div class="card-body text-center">
                     <h3>تم تسجيل طلبك بنجاح !</h3>
+                    <h3 dir="ltr">Your order has been registered successfully !</h3>
                 </div>
             </div>
         </div>

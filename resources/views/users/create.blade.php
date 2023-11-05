@@ -15,7 +15,7 @@
             @include('layouts.alerts')
             <div class="row justify-content-center">
                 <div class="col-12">
-                    <h2 class="h4 mb-3">إنشاء مستخدم</h2>
+                    <h2 class="h4 mb-3">إنشاء مستخدم | New user</h2>
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="row">
@@ -23,27 +23,27 @@
                                     <form action="{{ route('users.store') }}" method="POST">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <label for="simpleinput">الاسم</label>
+                                            <label for="simpleinput">الاسم | Name</label>
                                             <input type="text" id="simpleinput" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" name="name" required>
                                             @error('name')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="example-email">البريد الإلكتروني</label>
+                                            <label for="example-email">البريد الإلكتروني | Email</label>
                                             <input type="email" id="example-email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
                                             @error('email')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="example-password">كلمة المرور</label>
+                                            <label for="example-password">كلمة المرور | Password</label>
                                             <input type="password" id="example-password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" required>
                                             @error('password')
                                                 <strong class="invalid-feedback" role="alert">{{ $message }}</strong>
                                             @enderror
                                         </div>
-                                        <button type="submit" class="btn btn-primary">إنشاء</button>
+                                        <button type="submit" class="btn btn-primary">إنشاء | Create</button>
                                     </form>
                                 </div> <!-- /.col -->
                             </div>

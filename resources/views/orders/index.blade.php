@@ -12,7 +12,7 @@
                     <div class="row">
                         <!-- Small table -->
                         <div class="col-md-12 my-4">
-                            <h2 class="h4 mb-1">الطلبات</h2>
+                            <h2 class="h4 mb-1">الطلبات | Orders</h2>
                             <p class="mb-3">طلبات سلطان الجمبري</p>
                             <div class="card shadow">
                                 <div class="card-body">
@@ -20,13 +20,13 @@
                                         <form class="form">
                                             <div class="form-row">
                                                 <div class="form-group col-auto mr-auto">
-                                                    <a href="{{ route('orders.export', request()->query()) }}" class="btn btn-primary">تصدير الكل</a>
+                                                    <a href="{{ route('orders.export', request()->query()) }}" class="btn btn-primary">تصدير الكل | Export all</a>
                                                 </div>
 
                                                 <div class="form-group col-auto d-flex">
                                                     <form method="GET" action="{{ route('orders') }}">
-                                                        <label for="search" class="sr-only">بحث</label>
-                                                        <input type="text" name="search" class="form-control" id="search1" placeholder="بحث..." value="{{ request()->get('search') }}">
+                                                        <label for="search" class="sr-only">بحث | Search</label>
+                                                        <input type="text" name="search" class="form-control" id="search1" placeholder="بحث | Search..." value="{{ request()->get('search') }}">
                                                         <input type="submit" value="بحث" class="btn btn-primary mx-2">
                                                     </form>
                                                 </div>
@@ -38,10 +38,10 @@
                                         <thead>
                                             <tr>
                                                 <td>#</td>
-                                                <th>اسم العامل</th>
-                                                <th>اسم الفرع</th>
-                                                <th>الطلبية</th>
-                                                <th>التاريخ</th>
+                                                <th>اسم العامل | Cashier name</th>
+                                                <th>اسم الفرع | Branch name</th>
+                                                <th>الطلبية | Order</th>
+                                                <th>التاريخ | Date</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -56,7 +56,7 @@
                                                     }) !!}</td>
                                                     <td>{{ $order->created_at->toDateString() }}</td>
                                                     <td>
-                                                        <a href="{{ route('order.export', $order->id) }}" class="btn btn-primary">تصدير</a>
+                                                        <a href="{{ route('order.export', $order->id) }}" class="btn btn-primary">تصدير | Export</a>
                                                     </td>
                                                 </tr>
                                             @endforeach

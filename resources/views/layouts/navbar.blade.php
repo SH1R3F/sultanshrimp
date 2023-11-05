@@ -1,11 +1,6 @@
 <nav class="topnav navbar navbar-light">
-    <button type="button" class="navbar-toggler text-muted mt-2 p-0 mr-3 collapseSidebar">
-        <i class="fe fe-menu navbar-toggler-icon"></i>
-    </button>
-    <form class="form-inline mr-auto searchform text-muted">
-        <input class="form-control mr-sm-2 bg-transparent border-0 pl-4 text-muted" type="search"
-            placeholder="Type something..." aria-label="Search">
-    </form>
+    <div class="form-inline mr-auto text-muted">
+    </div>
     <ul class="nav">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
@@ -17,7 +12,7 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="dropdown-item" href="#">تسجيل خروج</button>
+                    <button type="submit" class="dropdown-item" href="#">تسجيل خروج / Logout</button>
                 </form>
             </div>
         </li>

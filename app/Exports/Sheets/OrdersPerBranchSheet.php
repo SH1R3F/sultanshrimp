@@ -26,9 +26,9 @@ class OrdersPerBranchSheet implements FromCollection, WithStrictNullComparison, 
     {
         return [
             '#',
-            'الطلبية',
-            'المطلوب',
-            'الموجود',
+            'الطلبية | Order',
+            'المطلوب | Required',
+            'الموجود | Existing',
         ];
     }
 

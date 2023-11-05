@@ -31,18 +31,6 @@ class OrdersExport implements WithEvents, WithMultipleSheets
         return $sheets;
     }
 
-
-    public function headings(): array
-    {
-        return [
-            '#',
-            'اسم العامل',
-            'اسم الفرع',
-            'الطلبية',
-            'التاريخ',
-        ];
-    }
-
     /**
      * @return array
      */

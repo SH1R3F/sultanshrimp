@@ -627,8 +627,8 @@
         }
 
         .shadow-2xl {
-            --tw-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+            --tw-shadow: 0 25px 45px -12px rgb(0 0 0 / 0.25);
+            --tw-shadow-colored: 0 25px 45px -12px var(--tw-shadow-color);
             box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
         }
 
@@ -1192,7 +1192,7 @@
         }
 
         .p-b-50 {
-            padding-bottom: 50px;
+            padding-bottom: 45px;
         }
 
         .m-r-45 {
@@ -1235,8 +1235,8 @@
         ========================================================================== */
         .btn {
             display: inline-block;
-            line-height: 50px;
-            padding: 0 50px;
+            line-height: 45px;
+            padding: 0 45px;
             -webkit-transition: all 0.4s ease;
             -o-transition: all 0.4s ease;
             -moz-transition: all 0.4s ease;
@@ -1429,7 +1429,7 @@
 
         .input--style-5 {
             background: #e5e5e5;
-            height: 50px;
+            height: 45px;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             border-radius: 5px;
@@ -1512,22 +1512,22 @@
         .rs-select2 .select2-container .select2-selection--single {
             outline: none;
             border: none;
-            height: 50px;
+            height: 45px;
             background: transparent;
         }
 
         .rs-select2 .select2-container .select2-selection--single .select2-selection__rendered {
-            height: 50px;
+            height: 45px;
             padding-left: 0;
             color: #555;
             font-size: 16px;
             font-family: inherit;
             padding-left: 22px;
-            padding-right: 50px;
+            padding-right: 45px;
         }
 
         .rs-select2 .select2-container .select2-selection--single .select2-selection__arrow {
-            height: 50px;
+            height: 45px;
             right: 15px;
             display: -webkit-box;
             display: -webkit-flex;
@@ -1622,7 +1622,7 @@
         @media (max-width: 767px) {
             .card-5 .card-body {
                 padding: 40px 30px;
-                padding-bottom: 50px;
+                padding-bottom: 45px;
             }
         }
 
@@ -1631,7 +1631,7 @@
             box-sizing: border-box;
             width: 100%;
             background: #e5e5e5;
-            height: 50px;
+            height: 45px;
             padding: 0 22px;
             font-size: 16px;
             color: #555;
@@ -1648,8 +1648,8 @@
         .my-btn {
             all: revert;
             box-sizing: border-box;
-            height: 50px;
-            width: 50px;
+            height: 45px;
+            width: 45px;
             border: none;
             font-size: 20px;
             cursor: pointer;
@@ -1672,7 +1672,7 @@
                 <div class="card-heading" style="background-image: url('{{ asset('assets/banner.jpg') }}')"></div>
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="name">اسم العامل</div>
+                        <div class="name">اسم العامل <br /> Cashier name</div>
                         <div class="value">
                             <div class="input-group-desc">
                                 <input class="input--style-5" type="text" name="first_name" placeholder="الاسم" required v-model="name">
@@ -1681,7 +1681,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="name">الفرع</div>
+                        <div class="name">الفرع <br /> Branch</div>
                         <div class="value">
                             <div class="input-group">
                                 <div class="rs-select2 js-select-simple select--no-search">
@@ -1696,41 +1696,28 @@
                         </div>
                     </div>
 
-                    <div class="form-row" v-for="(resource, index) in resources">
-                        <div class="name">الطلب</div>
+                    <div class="form-row" v-for="(resource, index) in allResources" :key="index">
+                        <div class="name">الطلب / Order</div>
                         <div class="value">
                             <div style="display: flex; flex-flow: wrap; gap: 10px;">
                                 <div style="flex: 1; min-width: 145px;">
-                                    <label style="display: block">الصنف</label>
-                                    <select name="branch" class="my-input" v-model="resource.resource">
-                                        <option disabled="disabled" value=''>إختر الصنف</option>
-                                        @foreach ($resources as $resource)
-                                            <option value="{{ $resource }}">{{ $resource }}</option>
-                                        @endforeach
-                                    </select>
+                                    <label style="display: block">الصنف <br /> Type</label>
+                                    <input type="text" class="my-input" v-model="resource.resource" readonly>
                                 </div>
                                 <div style="max-width: 100px;">
-                                    <label style="display: block">المطلوب</label>
+                                    <label style="display: block">المطلوب <br /> Required</label>
                                     <input type="number" class="my-input" v-model="resource.amount">
                                 </div>
                                 <div style="max-width: 100px;">
-                                    <label style="display: block">الموجود</label>
+                                    <label style="display: block">الموجود <br /> Existing</label>
                                     <input type="number" class="my-input" v-model="resource.existing">
-                                </div>
-                                <div style="max-width: 100px;">
-                                    <label style="display: block">&nbsp;</label>
-                                    <button class="my-btn" type="button" @click.prevent="addResource" :disabled="!resource.resource || !resource.amount">+</button>
-                                </div>
-                                <div style="max-width: 100px;">
-                                    <label style="display: block">&nbsp;</label>
-                                    <button class="my-btn" type="button" @click.prevent="removeResource(index)" :disabled="resources.length === 1">-</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div style="display: flex; justify-content: end">
-                        <button class="btn btn--radius-2 my-submit" @click.prevent="submitOrder" :disabled="disabled">طلب</button>
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="submitOrder" :disabled="disabled">طلب / Order</button>
                     </div>
                 </div>
             </div>
@@ -1747,30 +1734,21 @@
 
             const name = ref('');
             const branch = ref('');
-            const resources = ref([
-                {
-                    resource: '',
+
+            const resources = JSON.parse('{!! json_encode($resources) !!}');
+            const allResources = ref(resources.map((resource) => ({
+                    resource: resource,
                     amount: 0,
                     existing: 0,
-                }
-            ])
+                })))
+
+                console.log('allResources', allResources.value);
 
             const loading = ref(false)
             const disabled = computed(() => {
-                return loading.value || !name.value || !branch.value || resources.value.filter(resource => !resource.resource || !resource.amount).length
+                return loading.value || !name.value || !branch.value
             })
 
-            const addResource = () => {
-                resources.value.push({
-                    resource: '',
-                    amount: 0,
-                    existing: 0,
-                });
-            }
-
-            const removeResource = (index) => {
-                resources.value.splice(index, 1)
-            }
             const submitOrder = () => {
                 const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                 loading.value = true;
@@ -1784,7 +1762,7 @@
                     body: JSON.stringify({
                         name: name.value,
                         branch: branch.value,
-                        resources: resources.value,
+                        resources: allResources.value,
                     }),
                 }).then(res => {
                     name.value = '';
@@ -1804,11 +1782,9 @@
             return {
               name,
               branch,
-              resources,
-              addResource,
-              removeResource,
               submitOrder,
-              disabled
+              disabled,
+              allResources
             }
           }
         }).mount('#app')
