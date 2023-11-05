@@ -51,7 +51,7 @@
                                                     <td>{{ ++$key }}</td>
                                                     <td>{{ $order->name }}</td>
                                                     <td>{{ $order->branch }}</td>
-                                                    <td>{!! $order->resources->reduce(function (?string $carry, array $item) {
+                                                    <td>{!! $order->resources->reduce(function (?string $carry, $item) {
                                                         return $item->resource . ' | مطلوب ' . $item->amount . ' | موجود ' . $item->existing . '<br />' . $carry;
                                                     }) !!}</td>
                                                     <td>{{ $order->created_at->toDateString() }}</td>
