@@ -1203,7 +1203,7 @@
             margin-right: 55px;
         }
 
-         {
+            {
             margin-bottom: 55px;
         }
 
@@ -1437,7 +1437,7 @@
             font-size: 16px;
             color: #555;
             outline: none;
-            border:none;
+            border: none;
         }
 
         .input-group-desc {
@@ -1636,7 +1636,7 @@
             font-size: 16px;
             color: #555;
             outline: none;
-            border:none;
+            border: none;
             font-family: "Cairo";
             -moz-appearance: textfield;
         }
@@ -1658,9 +1658,34 @@
         .my-submit {
             background: #2c2965;
         }
+
         .my-submit[disabled] {
             background: #b1b1b1;
             cursor: auto;
+        }
+
+        #resources {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin: 20px 0;
+        }
+
+        #resources td, #resources th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+
+        #resources tr:nth-child(even){background-color: #f2f2f2;}
+
+        #resources tr:hover {background-color: #ddd;}
+
+        #resources th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #21205c;
+        color: white;
         }
     </style>
 </head>
@@ -1670,12 +1695,13 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading" style="background-image: url('{{ asset('assets/banner.jpg') }}')"></div>
-                <div class="card-body">
+                <div class="card-body" v-if="step === 1">
                     <div class="form-row">
                         <div class="name">اسم العامل <br /> Cashier name</div>
                         <div class="value">
                             <div class="input-group-desc">
-                                <input class="input--style-5" type="text" name="first_name" placeholder="الاسم" required v-model="name">
+                                <input class="input--style-5" type="text" name="first_name" placeholder="الاسم"
+                                    required v-model="name">
                             </div>
                         </div>
                     </div>
@@ -1685,7 +1711,8 @@
                         <div class="value">
                             <div class="input-group">
                                 <div class="rs-select2 js-select-simple select--no-search">
-                                    <select name="branch" class="select2-hidden-accessible input--style-5 label--block" required v-model="branch">
+                                    <select name="branch" class="select2-hidden-accessible input--style-5 label--block"
+                                        required v-model="branch">
                                         <option disabled="disabled" value=''>إختر الفرع</option>
                                         @foreach ($branches as $branch)
                                             <option value="{{ $branch }}">{{ $branch }}</option>
@@ -1717,7 +1744,29 @@
                     </div>
 
                     <div style="display: flex; justify-content: end">
-                        <button class="btn btn--radius-2 my-submit" @click.prevent="submitOrder" :disabled="disabled">طلب / Order</button>
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="step = 2"
+                            :disabled="disabled">التالي / Next</button>
+                    </div>
+                </div>
+
+                <div class="card-body" v-if="step === 2">
+                    <h3>مراجعة الطلب / Order summary</h3>
+                    <table id="resources">
+                        <tr>
+                            <th>الصنف / Item</th>
+                            <th>المطلوب / Required</th>
+                            <th>الموجود / Existing</th>
+                        </tr>
+                        <tr v-for="resource in allResources">
+                            <td v-text="resource.resource"></td>
+                            <td v-text="resource.amount"></td>
+                            <td v-text="resource.existing"></td>
+                        </tr>
+                    </table>
+                    <div style="display: flex; justify-content: space-between">
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="step = 1">السابق / Prev</button>
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="submitOrder"
+                            :disabled="disabled">طلب / Order</button>
                     </div>
                 </div>
             </div>
@@ -1727,68 +1776,72 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
     <script>
-        const { createApp, ref, computed } = Vue
-      
+        const {
+            createApp,
+            ref,
+            computed
+        } = Vue
+
         createApp({
-          setup() {
+            setup() {
 
-            const name = ref('');
-            const branch = ref('');
+                const name = ref('');
+                const branch = ref('');
+                const step = ref(2);
 
-            const resources = JSON.parse('{!! json_encode($resources) !!}');
-            const allResources = ref(resources.map((resource) => ({
+                const resources = JSON.parse('{!! json_encode($resources) !!}');
+                const allResources = ref(resources.map((resource) => ({
                     resource: resource,
                     amount: 0,
                     existing: 0,
                 })))
 
-                console.log('allResources', allResources.value);
+                const loading = ref(false)
+                const disabled = computed(() => {
+                    return loading.value || !name.value || !branch.value
+                })
 
-            const loading = ref(false)
-            const disabled = computed(() => {
-                return loading.value || !name.value || !branch.value
-            })
+                const submitOrder = () => {
+                    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                    loading.value = true;
 
-            const submitOrder = () => {
-                const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                loading.value = true;
+                    fetch("{{ route('order') }}", {
+                        method: "POST",
+                        headers: {
+                            "Content-type": "application/json; charset=UTF-8",
+                            'X-CSRF-TOKEN': token
+                        },
+                        body: JSON.stringify({
+                            name: name.value,
+                            branch: branch.value,
+                            resources: allResources.value,
+                        }),
+                    }).then(res => {
+                        name.value = '';
+                        if (res.status === 200) {
+                            window.location = "{{ route('order.created') }}"
+                        } else {
+                            throw new Error('Request failed!');
+                        }
+                    }).catch(err => {
+                        alert('حدث خطأ برجاء المحاولة مرة أخرى')
+                        window.location.reload()
+                    }).finally(() => {
+                        loading.value = false;
+                    });
+                }
 
-                fetch("{{ route('order') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8",
-                        'X-CSRF-TOKEN': token
-                    },
-                    body: JSON.stringify({
-                        name: name.value,
-                        branch: branch.value,
-                        resources: allResources.value,
-                    }),
-                }).then(res => {
-                    name.value = '';
-                    if (res.status === 200) {
-                        window.location = "{{ route('order.created') }}"
-                    } else {
-                        throw new Error('Request failed!');
-                    }
-                }).catch(err => {
-                    alert('حدث خطأ برجاء المحاولة مرة أخرى')
-                    window.location.reload()
-                }).finally(() => {
-                    loading.value = false;
-                });
+                return {
+                    name,
+                    branch,
+                    submitOrder,
+                    disabled,
+                    allResources,
+                    step
+                }
             }
-
-            return {
-              name,
-              branch,
-              submitOrder,
-              disabled,
-              allResources
-            }
-          }
         }).mount('#app')
-      </script>
+    </script>
 </body>
 
 </html>
