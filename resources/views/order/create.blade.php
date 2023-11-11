@@ -1787,7 +1787,7 @@
 
                 const name = ref('');
                 const branch = ref('');
-                const step = ref(2);
+                const step = ref(1);
 
                 const resources = JSON.parse('{!! json_encode($resources) !!}');
                 const allResources = ref(resources.map((resource) => ({
