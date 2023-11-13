@@ -1757,7 +1757,7 @@
                             <th>المطلوب / Required</th>
                             <th>الموجود / Existing</th>
                         </tr>
-                        <tr v-for="resource in allResources">
+                        <tr v-for="resource in allResources" v-if="resource.amount || resource.existing">
                             <td v-text="resource.resource"></td>
                             <td v-text="resource.amount"></td>
                             <td v-text="resource.existing"></td>
