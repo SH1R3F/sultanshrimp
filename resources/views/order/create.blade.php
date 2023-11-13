@@ -1757,11 +1757,13 @@
                             <th>المطلوب / Required</th>
                             <th>الموجود / Existing</th>
                         </tr>
-                        <tr v-for="resource in allResources" v-if="resource.amount || resource.existing">
-                            <td v-text="resource.resource"></td>
-                            <td v-text="resource.amount"></td>
-                            <td v-text="resource.existing"></td>
-                        </tr>
+                        <template v-for="resource in allResources" :key="resource.resource">
+                            <tr v-if="resource.amount || resource.existing">
+                                <td v-text="resource.resource"></td>
+                                <td v-text="resource.amount"></td>
+                                <td v-text="resource.existing"></td>
+                            </tr>
+                        </template>
                     </table>
                     <div style="display: flex; justify-content: space-between">
                         <button class="btn btn--radius-2 my-submit" @click.prevent="step = 1">السابق / Prev</button>
