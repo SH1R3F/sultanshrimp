@@ -29,6 +29,7 @@ class OrdersPerBranchSheet implements FromCollection, WithStrictNullComparison, 
             'الطلبية | Order',
             'المطلوب | Required',
             'الموجود | Existing',
+            'التاريخ | Date'
         ];
     }
 
@@ -39,6 +40,7 @@ class OrdersPerBranchSheet implements FromCollection, WithStrictNullComparison, 
             $resource->resource,
             $resource->amount,
             $resource->existing,
+            $this->order->created_at->toDateString()
         ];
     }
 

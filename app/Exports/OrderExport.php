@@ -27,6 +27,7 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
             'الطلبية | Order',
             'المطلوب | Required',
             'الموجود | Existing',
+            'التاريخ | Date'
         ];
     }
 
@@ -37,6 +38,7 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
             $resource->resource,
             $resource->amount,
             $resource->existing,
+            $this->order->created_at->toDateString()
         ];
     }
 
