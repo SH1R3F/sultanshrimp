@@ -74,11 +74,13 @@ class OrderController extends Controller
         ]);
 
         foreach ($request->resources as $resource) {
-            $order->resources()->create([
-                'resource' => $resource['resource'],
-                'amount' => $resource['amount'],
-                'existing' => $resource['existing'],
-            ]);
+            if ($resource['amount'] || $resource['existing']) {
+                $order->resources()->create([
+                    'resource' => $resource['resource'],
+                    'amount' => $resource['amount'],
+                    'existing' => $resource['existing'],
+                ]);
+            }
         }
         
         return response()->json([
