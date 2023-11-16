@@ -57,6 +57,11 @@
                                                     <td>{{ $order->created_at->toDateString() }}</td>
                                                     <td>
                                                         <a href="{{ route('order.export', $order->id) }}" class="btn btn-primary">تصدير | Export</a>
+                                                        <form style="display: inline-block" action="{{ route('order.delete', $order->id) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">حذف | Delete</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach

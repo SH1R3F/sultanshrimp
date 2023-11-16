@@ -1758,7 +1758,7 @@
                             <th>الموجود / Existing</th>
                         </tr>
                         <template v-for="resource in allResources" :key="resource.resource">
-                            <tr v-if="resource.amount || resource.existing">
+                            <tr>
                                 <td v-text="resource.resource"></td>
                                 <td v-text="resource.amount"></td>
                                 <td v-text="resource.existing"></td>

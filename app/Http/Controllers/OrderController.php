@@ -74,17 +74,21 @@ class OrderController extends Controller
         ]);
 
         foreach ($request->resources as $resource) {
-            if ($resource['amount'] || $resource['existing']) {
-                $order->resources()->create([
-                    'resource' => $resource['resource'],
-                    'amount' => $resource['amount'],
-                    'existing' => $resource['existing'],
-                ]);
-            }
+            $order->resources()->create([
+                'resource' => $resource['resource'],
+                'amount' => $resource['amount'],
+                'existing' => $resource['existing'],
+            ]);
         }
         
         return response()->json([
             'message' => 'تم التحديث بنجاح'
         ]);
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->delete();
+        return redirect()->route('orders')->with('success', 'تم حذف الطلب بنجاح');
     }
 }

@@ -32,7 +32,8 @@ Route::group([
     Route::get('/orders', [OrderController::class, 'index'])->name('orders');
     Route::get('/orders/export', [OrderController::class, 'export'])->name('orders.export');
     Route::get('/order/{order}/export', [OrderController::class, 'exportOrder'])->name('order.export');
-
+    Route::delete('/order/{order}', [OrderController::class, 'destroy'])->name('order.delete');
+    
     Route::get('/options', [OptionController::class, 'index'])->name('options');
     Route::post('/options', [OptionController::class, 'store']);
 
