@@ -51,9 +51,12 @@
                                                     <td>{{ ++$key }}</td>
                                                     <td>{{ $order->name }}</td>
                                                     <td>{{ $order->branch }}</td>
-                                                    <td>{!! $order->resources->reduce(function (?string $carry, $item) {
-                                                        return $item->resource . ' | مطلوب ' . $item->amount . ' | موجود ' . $item->existing . '<br />' . $carry;
-                                                    }) !!}</td>
+                                                    <?php
+                                                    $summary = $order->resources->reduce(function (?string $carry, $item) {
+                                                        return $item->resource . ' | مطلوب ' . $item->amount . ' | موجود ' . $item->existing . '\n' . $carry;
+                                                    });
+                                                    ?>
+                                                    <td><button class="btn btn-primary btn-sm" onclick="alert('{{ $summary }}')">عرض / view</button></td>
                                                     <td>{{ $order->created_at->toDateString() }}</td>
                                                     <td>
                                                         <a href="{{ route('order.export', $order->id) }}" class="btn btn-primary">تصدير | Export</a>

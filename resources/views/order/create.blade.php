@@ -1744,7 +1744,7 @@
                     </div>
 
                     <div style="display: flex; justify-content: end">
-                        <button class="btn btn--radius-2 my-submit" @click.prevent="step = 2"
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="stepTwo"
                             :disabled="disabled">التالي / Next</button>
                     </div>
                 </div>
@@ -1766,7 +1766,7 @@
                         </template>
                     </table>
                     <div style="display: flex; justify-content: space-between">
-                        <button class="btn btn--radius-2 my-submit" @click.prevent="step = 1">السابق / Prev</button>
+                        <button class="btn btn--radius-2 my-submit" @click.prevent="stepOne">السابق / Prev</button>
                         <button class="btn btn--radius-2 my-submit" @click.prevent="submitOrder"
                             :disabled="disabled">طلب / Order</button>
                     </div>
@@ -1794,8 +1794,8 @@
                 const resources = JSON.parse('{!! json_encode($resources) !!}');
                 const allResources = ref(resources.map((resource) => ({
                     resource: resource,
-                    amount: 0,
-                    existing: 0,
+                    amount: '',
+                    existing: '',
                 })))
 
                 const loading = ref(false)
@@ -1833,13 +1833,41 @@
                     });
                 }
 
+                const stepOne = () => {
+                    allResources.value = allResources.value.map(resource => {
+                        if (resource.amount === 0) {
+                            resource.amount = '';
+                        }
+                        if (resource.existing === 0) {
+                            resource.existing = '';
+                        }
+                        return resource;
+                    })
+                    step.value = 1
+                }
+
+                const stepTwo = () => {
+                    allResources.value = allResources.value.map(resource => {
+                        if (resource.amount === '') {
+                            resource.amount = 0;
+                        }
+                        if (resource.existing === '') {
+                            resource.existing = 0;
+                        }
+                        return resource;
+                    })
+                    step.value = 2
+                }
+
                 return {
                     name,
                     branch,
                     submitOrder,
                     disabled,
                     allResources,
-                    step
+                    step,
+                    stepOne,
+                    stepTwo
                 }
             }
         }).mount('#app')
