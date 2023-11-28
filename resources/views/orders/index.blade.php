@@ -40,7 +40,7 @@
                                                 <td>#</td>
                                                 <th>اسم العامل | Cashier name</th>
                                                 <th>اسم الفرع | Branch name</th>
-                                                <th>الطلبية | Order</th>
+                                                {{-- <th>الطلبية | Order</th> --}}
                                                 <th>التاريخ | Date</th>
                                                 <th></th>
                                             </tr>
@@ -56,7 +56,7 @@
                                                         return $item->resource . ' | مطلوب ' . $item->amount . ' | موجود ' . $item->existing . '\n' . $carry;
                                                     });
                                                     ?>
-                                                    <td><button class="btn btn-primary btn-sm" onclick="alert('{{ $summary }}')">عرض / view</button></td>
+                                                    {{-- <td><button class="btn btn-primary btn-sm" onclick="alert('{{ $summary }}')">عرض / view</button></td> --}}
                                                     <td>{{ $order->created_at->toDateString() }}</td>
                                                     <td>
                                                         <a href="{{ route('order.export', $order->id) }}" class="btn btn-primary">تصدير | Export</a>
