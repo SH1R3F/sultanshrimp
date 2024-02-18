@@ -18,7 +18,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = Order::with('resources')->when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('branch', 'LIKE', "%$search%"))
-            ->orderBy('id', 'DESC')->paginate(15);
+            ->orderBy('id', 'DESC')->paginate(15)->withQueryString();
 
         return view('orders.index', ['orders' => $orders]);
     }
@@ -29,7 +29,7 @@ class OrderController extends Controller
     public function export(Request $request)
     {
         $orders = Order::with('resources')->when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('branch', 'LIKE', "%$search%"))
-            ->orderBy('id', 'DESC')->paginate(15);
+            ->orderBy('id', 'DESC')->get();
 
         if (!count($orders)) {
             return redirect()->back();
