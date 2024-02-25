@@ -17,21 +17,24 @@
                             <div class="card shadow">
                                 <div class="card-body">
                                     <div class="toolbar">
-                                        <form class="form">
-                                            <div class="form-row">
-                                                <div class="form-group col-auto mr-auto">
-                                                    <a href="{{ route('orders.export', request()->query()) }}" class="btn btn-primary">تصدير الكل | Export all</a>
-                                                </div>
-
-                                                <div class="form-group col-auto d-flex">
-                                                    <form method="GET" action="{{ route('orders') }}">
-                                                        <label for="search" class="sr-only">بحث | Search</label>
-                                                        <input type="text" name="search" class="form-control" id="search1" placeholder="بحث | Search..." value="{{ request()->get('search') }}">
-                                                        <input type="submit" value="بحث" class="btn btn-primary mx-2">
-                                                    </form>
-                                                </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-auto mr-auto">
+                                                <a href="{{ route('orders.export', request()->query()) }}" class="btn btn-primary">تصدير الكل | Export all</a>
+                                                <form style="display: inline-block" action="{{ route('orders.delete', request()->query()) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">حذف الكل | Delete all</button>
+                                                </form>
                                             </div>
-                                        </form>
+
+                                            <div class="form-group col-auto d-flex">
+                                                <form method="GET" action="{{ route('orders') }}">
+                                                    <label for="search" class="sr-only">بحث | Search</label>
+                                                    <input type="text" name="search" class="form-control" id="search1" placeholder="بحث | Search..." value="{{ request()->get('search') }}">
+                                                    <input type="submit" value="بحث" class="btn btn-primary mx-2">
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!-- table -->
                                     <table class="table table-borderless table-hover">

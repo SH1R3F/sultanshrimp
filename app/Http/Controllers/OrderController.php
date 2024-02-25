@@ -80,7 +80,7 @@ class OrderController extends Controller
                 'existing' => $resource['existing'],
             ]);
         }
-        
+
         return response()->json([
             'message' => 'تم التحديث بنجاح'
         ]);
@@ -90,5 +90,14 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('orders')->with('success', 'تم حذف الطلب بنجاح');
+    }
+
+    public function delete(Request $request)
+    {
+        $orders = Order::when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('branch', 'LIKE', "%$search%"))
+            ->delete();
+
+        return redirect()->route('orders')->with('success', 'تم الحذف بنجاح');
     }
 }
