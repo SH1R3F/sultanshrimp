@@ -1701,7 +1701,7 @@
                         <div class="value">
                             <div class="input-group-desc">
                                 <input class="input--style-5" type="text" name="name" placeholder="الاسم"
-                                    required v-model="name">
+                                    v-model="name">
                             </div>
                         </div>
                     </div>
@@ -1742,7 +1742,7 @@
 
                 const loading = ref(false)
                 const disabled = computed(() => {
-                    return loading.value || !name.value || !phone.value
+                    return loading.value || !phone.value
                 })
 
                 const register = () => {
