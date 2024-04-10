@@ -9,14 +9,14 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithStrictNullComparison;
 
-class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEvents, WithStrictNullComparison
+class ClientsExport implements FromCollection, WithHeadings, WithMapping, WithEvents, WithStrictNullComparison
 {
-    private $order;
+    private $clients;
     private $row = 0;
 
-    public function __construct($order)
+    public function __construct($clients)
     {
-        $this->order = $order;
+        $this->clients = $clients;
     }
 
 
@@ -24,9 +24,8 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
     {
         return [
             '#',
-            'الطلبية | Order',
-            'المطلوب | Required',
-            'الموجود | Existing',
+            'الاسم | Name',
+            'الرقم | Phone',
             'التاريخ | Date'
         ];
     }
@@ -35,10 +34,9 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
     {
         return [
             ++$this->row,
-            $resource->resource,
-            $resource->amount,
-            $resource->existing,
-            $this->order->created_at->toDateString()
+            $resource->name,
+            $resource->phone,
+            $resource->created_at->toDateString()
         ];
     }
 
@@ -59,6 +57,6 @@ class OrderExport implements FromCollection, WithHeadings, WithMapping, WithEven
      */
     public function collection()
     {
-        return $this->order->resources;
+        return $this->clients;
     }
 }

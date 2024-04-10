@@ -33,6 +33,12 @@
                     <span class="ml-3 item-text">الخيارات | Options</span>
                 </a>
             </li>
+            <li class="nav-item w-100">
+                <a class="nav-link" href="{{ route('clients') }}">
+                    <i class="fe fe-box fe-16"></i>
+                    <span class="ml-3 item-text">التسجيلات | Registrations</span>
+                </a>
+            </li>
         </ul>
         @if (auth()->user()->id === 1)
             <p class="text-muted nav-heading mt-4 mb-1">
