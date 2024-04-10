@@ -17,7 +17,7 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        $clients = Client::when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('phone', 'LIKE', "%$search%"))
+        $clients = Client::when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('phone', 'LIKE', "%$search%")->orWhere('branch', 'LIKE', "%$search%"))
             ->orderBy('id', 'DESC')->paginate(15)->withQueryString();
 
         return view('clients.index', ['clients' => $clients]);
@@ -28,7 +28,7 @@ class ClientController extends Controller
      */
     public function export(Request $request)
     {
-        $clients = Client::when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('phone', 'LIKE', "%$search%"))
+        $clients = Client::when($request->search, fn($query, $search) => $query->where('name', 'LIKE', "%$search%")->orWhere('phone', 'LIKE', "%$search%")->orWhere('branch', 'LIKE', "%$search%"))
             ->orderBy('id', 'DESC')->get();
 
         if (!count($clients)) {
@@ -43,7 +43,15 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('client.create');
+        $options = Option::whereIn('key', ['branches'])
+        ->get()
+        ->mapWithKeys(function ($option) {
+            return [$option->key => $option->values];
+        });
+
+        return view('client.create', [
+            'branches'  => $options['branches'] ?? [],
+        ]);
     }
 
     /**
@@ -54,6 +62,7 @@ class ClientController extends Controller
         $client = Client::create([
             'name' => $request->name,
             'phone' => $request->phone,
+            'branch' => $request->branch,
         ]);
 
         return response()->json([

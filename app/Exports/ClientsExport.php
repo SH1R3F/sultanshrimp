@@ -26,6 +26,7 @@ class ClientsExport implements FromCollection, WithHeadings, WithMapping, WithEv
             '#',
             'الاسم | Name',
             'الرقم | Phone',
+            'الفرع | Branch',
             'التاريخ | Date'
         ];
     }
@@ -36,6 +37,7 @@ class ClientsExport implements FromCollection, WithHeadings, WithMapping, WithEv
             ++$this->row,
             $resource->name,
             $resource->phone,
+            $resource->branch,
             $resource->created_at->toDateString()
         ];
     }

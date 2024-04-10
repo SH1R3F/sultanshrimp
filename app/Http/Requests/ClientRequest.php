@@ -24,6 +24,7 @@ class ClientRequest extends FormRequest
         return [
             'name' => ['nullable', 'string'],
             'phone' => ['required', 'numeric'],
+            'branch' => ['required', 'string'],
         ];
     }
 }

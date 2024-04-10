@@ -43,6 +43,7 @@
                                                 <td>#</td>
                                                 <th>الاسم | Name</th>
                                                 <th>رقم التليفون | Phone number</th>
+                                                <th>الفرع | Branch</th>
                                                 <th>التاريخ | Date</th>
                                                 <th></th>
                                             </tr>
@@ -53,6 +54,7 @@
                                                     <td>{{ ++$key }}</td>
                                                     <td>{{ $client->name }}</td>
                                                     <td>{{ $client->phone }}</td>
+                                                    <td>{{ $client->branch }}</td>
                                                     <td>{{ $client->created_at->toDateString() }}</td>
                                                     <td>
                                                         <form style="display: inline-block" action="{{ route('client.delete', $client->id) }}" method="POST">

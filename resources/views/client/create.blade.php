@@ -1716,6 +1716,23 @@
                         </div>
                     </div>
 
+                    <div class="form-row">
+                        <div class="name">الفرع <br /> Branch</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select name="branch" class="select2-hidden-accessible input--style-5 label--block"
+                                        required v-model="branch">
+                                        <option disabled="disabled" value=''>إختر الفرع</option>
+                                        @foreach ($branches as $branch)
+                                            <option value="{{ $branch }}">{{ $branch }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div style="display: flex; justify-content: end">
                         <button class="btn btn--radius-2 my-submit" @click.prevent="register"
                             :disabled="disabled">تسجيل / Register</button>
@@ -1739,10 +1756,11 @@
 
                 const name = ref('');
                 const phone = ref('');
+                const branch = ref('');
 
                 const loading = ref(false)
                 const disabled = computed(() => {
-                    return loading.value || !phone.value
+                    return loading.value || !phone.value || !branch.value
                 })
 
                 const register = () => {
@@ -1758,11 +1776,13 @@
                         body: JSON.stringify({
                             name: name.value,
                             phone: phone.value,
+                            branch: branch.value,
                         }),
                     }).then(res => {
                         if (res.status === 200) {
                             name.value = '';
                             phone.value = '';
+                            branch.value = '';
                         } else {
                             throw new Error('Request failed!');
                         }
@@ -1777,6 +1797,7 @@
                 return {
                     name,
                     phone,
+                    branch,
                     register,
                     disabled,
                 }
