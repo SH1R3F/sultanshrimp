@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\OptionController;
 
 /*
@@ -44,6 +45,11 @@ Route::group([
     Route::delete('/client/{client}', [ClientController::class, 'destroy'])->name('client.delete');
     Route::delete('/clients', [ClientController::class, 'delete'])->name('clients.delete');
 
+    Route::get('/sales', [SalesController::class, 'index'])->name('sales');
+    Route::get('/sales/export', [SalesController::class, 'export'])->name('sales.export');
+    Route::delete('/sale/{sale}', [SalesController::class, 'destroy'])->name('sale.delete');
+    Route::delete('/sales', [SalesController::class, 'delete'])->name('sales.delete');
+
 
     Route::middleware('superadmin')->group(function() {
         Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -61,3 +67,6 @@ Route::view('/order/created', 'order.created')->name('order.created');
 
 Route::get('/client', [ClientController::class, 'create'])->name('client');
 Route::post('/client', [ClientController::class, 'store']);
+
+Route::get('/sales', [SalesController::class, 'create'])->name('sale');
+Route::post('/sales', [SalesController::class, 'store']);
