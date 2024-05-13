@@ -61,7 +61,7 @@ class SalesController extends Controller
         $sales = Sales::create([
             'name' => $request->name,
             'branch' => $request->branch,
-            'cash' => $request->branch,
+            'cash' => $request->cash,
             'network' => $request->network,
             'delivery' => $request->delivery,
         ]);
