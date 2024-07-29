@@ -70,3 +70,5 @@ Route::post('/client', [ClientController::class, 'store']);
 
 Route::get('/sales', [SalesController::class, 'create'])->name('sale');
 Route::post('/sales', [SalesController::class, 'store']);
+
+Route::view('/link-tree', 'linktree');
