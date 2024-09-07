@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithTitle;
 
 
-class OrderExport implements WithEvents, WithHeadings, WithTitle, WithHeadings, WithMapping
+class OrderExport implements WithEvents, WithTitle, WithHeadings, WithMapping
 {
     private $order;
     private $row = 0;
