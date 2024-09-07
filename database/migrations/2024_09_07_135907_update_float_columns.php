@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('order_resources', function (Blueprint $table) {
             $table->unsignedFloat('amount')->change();
-            $table->unsignedFloat('existing')->change();
+            $table->unsignedFloat('existing')->default(0)->change();
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('order_resources', function (Blueprint $table) {
             $table->unsignedInteger('amount')->change();
-            $table->unsignedInteger('existing')->change();
+            $table->unsignedInteger('existing')->default(0)->change();
         });
     }
 };
