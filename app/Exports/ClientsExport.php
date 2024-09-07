@@ -20,6 +20,7 @@ class ClientsExport implements FromCollection, WithHeadings, WithMapping, WithEv
     }
 
 
+
     public function headings(): array
     {
         return [
